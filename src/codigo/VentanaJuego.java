@@ -24,6 +24,8 @@ public class VentanaJuego extends javax.swing.JFrame {
     int filasMarcianos = 5;
     int columnasMarcianos = 10;
     
+    int contador = 0;
+    
     BufferedImage buffer = null;
     
     //Bucle de animación del juego. En este caso, es un hilo de ejecución nuevo que se 
@@ -36,6 +38,9 @@ public class VentanaJuego extends javax.swing.JFrame {
         }
     });
     
+    Marciano miMarciano = new Marciano(ANCHO_PANTALLA);
+ 
+            
     /**
      * Creates new form VentanaJuego
      */
@@ -60,7 +65,17 @@ public class VentanaJuego extends javax.swing.JFrame {
         g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA);
         
+        contador++;
         //////////////////////////////////////////////////
+        if (contador < 50) {
+            g2.drawImage(miMarciano.imagen1, 100, 100, null);
+        }
+        else if (contador <100) {
+            g2.drawImage(miMarciano.imagen2, 100, 100, null);
+        }
+        else {
+            contador = 0;
+        }
         
         //////////////////////////////////////////////////
         
