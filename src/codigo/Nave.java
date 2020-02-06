@@ -30,11 +30,11 @@ public class Nave {
     }
     
     public void mueve() {
-        if (pulsadoIzquierda) {
-            posX--;
+        if (pulsadoIzquierda && posX > 0) {
+            posX -= 3;
         }
-        if (pulsadoDerecha) {
-            posX++;
+        if (pulsadoDerecha && posX < VentanaJuego.ANCHO_PANTALLA - imagen.getWidth(null)) { //no da error porque es static. 
+            posX += 3;
         }
     }
 

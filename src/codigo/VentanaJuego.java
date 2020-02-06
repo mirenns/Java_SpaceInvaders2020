@@ -19,6 +19,7 @@ import javax.swing.Timer;
  */
 public class VentanaJuego extends javax.swing.JFrame {
 
+    //declaramos las constantes de la pantalla, que pueden ser utilizados por las clases hijas. 
     static int ANCHO_PANTALLA = 800;
     static int ALTO_PANTALLA = 600;
     
@@ -41,6 +42,7 @@ public class VentanaJuego extends javax.swing.JFrame {
     
     Marciano miMarciano = new Marciano(ANCHO_PANTALLA);
     Nave miNave = new Nave();
+    Disparo miDisparo = new Disparo();
     
             
     /**
@@ -84,7 +86,9 @@ public class VentanaJuego extends javax.swing.JFrame {
         }
         //dibuja la nave
         g2.drawImage(miNave.imagen, miNave.posX, miNave.posY, null);
-        miNave.mueve(); //si tiene a true el boton de la derecha, sumará, si es el de la izquierda, restará. 
+        g2.drawImage(miDisparo.imagen, miDisparo.posX, miDisparo.posY, null);
+        miNave.mueve(); //si tiene a true el boton de la derecha, sumará, si es el de la izquierda, restará.
+        miDisparo.mueve();
         
         //////////////////////////////////////////////////
         
@@ -145,14 +149,17 @@ public class VentanaJuego extends javax.swing.JFrame {
             case KeyEvent.VK_LEFT: miNave.setPulsadoIzquierda(true); break;
                 
             case KeyEvent.VK_RIGHT: miNave.setPulsadoDerecha(true); break;
+            
+            case KeyEvent.VK_SPACE : miDisparo.posicionaDisparo(miNave);
+                                     break;
         }
     }//GEN-LAST:event_formKeyPressed
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         switch (evt.getKeyCode()) {
-            case KeyEvent.VK_LEFT: miNave.setPulsadoIzquierda(false); break;
+            case KeyEvent.VK_LEFT : miNave.setPulsadoIzquierda(false); break;
                 
-            case KeyEvent.VK_RIGHT: miNave.setPulsadoDerecha(false); break;
+            case KeyEvent.VK_RIGHT : miNave.setPulsadoDerecha(false); break;
         }
     }//GEN-LAST:event_formKeyReleased
 
