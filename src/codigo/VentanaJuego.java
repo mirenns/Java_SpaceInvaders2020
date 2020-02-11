@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import javax.swing.Timer;
 
@@ -74,6 +75,9 @@ public class VentanaJuego extends javax.swing.JFrame {
                 listaMarcianos[i][j].posY = i * (10 + listaMarcianos[i][j].imagen1.getHeight(null));
             }
         }
+        
+        //Damos una posicion al disparo inicial para que no choque con ningún marciano.
+        miDisparo.posY = -2000;
                 
     }
     
@@ -124,6 +128,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         g2.drawImage(miDisparo.imagen, miDisparo.posX, miDisparo.posY, null);
         miNave.mueve(); //si tiene a true el boton de la derecha, sumará, si es el de la izquierda, restará.
         miDisparo.mueve();
+        chequeaColision();
         
         //////////////////////////////////////////////////
         
@@ -131,6 +136,27 @@ public class VentanaJuego extends javax.swing.JFrame {
         g2 = (Graphics2D) jPanel1.getGraphics();
         g2.drawImage(buffer, 0, 0, null);
         
+    }
+    
+    //creamos un método que chequee si un disparo y un marciano colisionan.
+    public void chequeaColision() {
+        Rectangle2D.Double rectanguloMarciano = new Rectangle2D.Double();
+        Rectangle2D.Double rectanguloDisparo = new Rectangle2D.Double();
+        
+        //Calculo el rectángulo que contiene al disparo
+        rectanguloDisparo.setFrame(miDisparo.posX, miDisparo.posY, miDisparo.imagen.getWidth(null), miDisparo.imagen.getHeight(null));
+        
+        for (int i = 0; i < filasMarcianos; i++) {
+            for (int j = 0; j < columnasMarcianos; j++) {
+                rectanguloMarciano.setFrame(listaMarcianos[i][j].posX, listaMarcianos[i][j].posY, listaMarcianos[i][j].imagen1.getWidth(null), listaMarcianos[i][j].imagen1.getHeight(null));
+                if (rectanguloDisparo.intersects(rectanguloMarciano)) {
+                    //si entra aquí es porque han chocado un marciano y el disparo.
+                    listaMarcianos[i][j].posY = 2000;
+                    miDisparo.posY = -2000;
+                }
+            }
+        }
+
     }
 
     /**
