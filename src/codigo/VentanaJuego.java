@@ -44,7 +44,7 @@ public class VentanaJuego extends javax.swing.JFrame {
     //Vamos a declarar la estructura de los marcianos que aparecerán en pantalla. Con un ARRAY
     //Vamos a declarar una lista de dos dimensiones, por eso hay dos corchetes. 
     Marciano [][]listaMarcianos = new Marciano [filasMarcianos] [columnasMarcianos];
-    boolean direccionMarciano = false; //si es true se mueve a la derecha. 
+    boolean direccionMarciano = true; //si es true se mueve a la derecha. 
     Nave miNave = new Nave();
     Disparo miDisparo = new Disparo();
     
@@ -82,6 +82,18 @@ public class VentanaJuego extends javax.swing.JFrame {
         for (int i = 0; i < filasMarcianos; i++) {
             for (int j = 0; j < columnasMarcianos; j++) {
                 listaMarcianos[i][j].mueve(direccionMarciano);
+                //HAY QUE ARREGLAR, QUE SEA CUANDO UNO SOLO TOQUE, SINO NO SE MUEVEN A LA VEZ.
+                //para que cuando llegue a la pared, cambie de dirección:
+                if (listaMarcianos[i][j].posX >= ANCHO_PANTALLA - listaMarcianos[i][j].imagen1.getWidth(null) || listaMarcianos[i][j].posX <= 0) {
+                    direccionMarciano = !direccionMarciano;
+                    //Hago que todos los marcianos bajen una fila.
+                    for (int k = 0; k < filasMarcianos; k++) {
+                        for (int m = 0; m < columnasMarcianos; m++) {
+                            listaMarcianos[k][m].posY += listaMarcianos[k][m].imagen1.getHeight(null);
+                        }
+                    }
+                }
+                //para que pinte los marcianos moviéndose:
                 if (contador < 50) {
                     _g2.drawImage(listaMarcianos[i][j].imagen1, listaMarcianos[i][j].posX, listaMarcianos[i][j].posY, null);
                 }

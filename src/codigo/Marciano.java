@@ -34,10 +34,10 @@ public class Marciano {
     }
     
     public void mueve(boolean direccion) { //habrá que mejorarlo, porque cuando llegue a la pared no debe seguir moviéndose. 
-        if (direccion) { //si direccion vale true, se mueve a la derecha. 
+        if (direccion) { //si direccion vale true, se mueve a la izq. 
             posX++;
         }
-        else { //si vale false, a la izquiera. 
+        else { //si vale false, a la dcha. 
             posX--;
         }
     }
