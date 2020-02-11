@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 /**
@@ -30,6 +32,10 @@ public class VentanaJuego extends javax.swing.JFrame {
     int contador = 0;
     
     BufferedImage buffer = null;
+    
+    //Buffer para guardar las imágenes de todos los marcianos. 
+    BufferedImage plantilla = null;
+    BufferedImage[] imagenes = new BufferedImage[30];
     
     //Bucle de animación del juego. En este caso, es un hilo de ejecución nuevo que se 
     //encarga de refrescar el contenido de la pantalla. 
@@ -55,6 +61,18 @@ public class VentanaJuego extends javax.swing.JFrame {
      */
     public VentanaJuego() {
         initComponents();
+        //Cargamos la plantilla con las imágenes
+        try {
+            plantilla = ImageIO.read(getClass().getResource("/imagenes/invaders2.png"));
+        }
+        catch (IOException ex){
+        }
+        //Esto sirve para cargar las subimagenes de la plantilla en el array de bufferedimages
+        for (int i=0; i<6; i++) {
+            for (int j=0; j<5; j++) { 
+                imagenes[i*5 + j] = plantilla.getSubimage(j*32, i*32, 32, 32);
+            }
+        }
         setSize(ANCHO_PANTALLA, ALTO_PANTALLA);
         //Creamos una imagen del mismo alto y ancho que el jPanel1 y lo guarda en el buffer.
         buffer = (BufferedImage) jPanel1.createImage(ANCHO_PANTALLA, ALTO_PANTALLA); 
@@ -71,6 +89,8 @@ public class VentanaJuego extends javax.swing.JFrame {
         for (int i = 0; i < filasMarcianos; i++) {
             for (int j = 0; j < columnasMarcianos; j++) {
                 listaMarcianos[i][j] = new Marciano(ANCHO_PANTALLA);
+                listaMarcianos[i][j].imagen1 = imagenes[2];
+                listaMarcianos[i][j].imagen2 = imagenes[3];
                 listaMarcianos[i][j].posX = j * (15 + listaMarcianos[i][j].imagen1.getWidth(null)); //15px será la distancia entre marcianos
                 listaMarcianos[i][j].posY = i * (10 + listaMarcianos[i][j].imagen1.getHeight(null));
             }

@@ -24,13 +24,6 @@ public class Marciano {
     
     public Marciano(int _anchoPantalla) { 
         anchoPantalla = _anchoPantalla;
-        try {
-            imagen1 = ImageIO.read(getClass().getResource("/imagenes/marcianito1.png"));
-            imagen2 = ImageIO.read(getClass().getResource("/imagenes/marcianito2.png"));
-        }
-        catch (Exception e){
-        
-        }
     }
     
     public void mueve(boolean direccion) { //habrá que mejorarlo, porque cuando llegue a la pared no debe seguir moviéndose. 
