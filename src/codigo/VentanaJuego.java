@@ -230,6 +230,7 @@ public class VentanaJuego extends javax.swing.JFrame {
                         e.imagen1 = imagenes[23]; //que se pinte la parteA de la explosión.
                         e.imagen2 = imagenes[22]; //que se pinte la parteB de la explosión. 
                         listaExplosiones.add(e); //lo añadimos al arrayList de explosiones. 
+                        e.sonidoExplosion.start();//hacemos que suene la explosión. 
                         
                         listaMarcianos[i][j].posY = 2000; //esto hace que el marciano desaparezca. 
                         listaDisparos.remove(k); //esto hace que el disparo desaparezca. 
@@ -292,6 +293,7 @@ public class VentanaJuego extends javax.swing.JFrame {
             case KeyEvent.VK_RIGHT: miNave.setPulsadoDerecha(true); break;
             
             case KeyEvent.VK_SPACE : Disparo d = new Disparo();
+                                     d.sonidoDisparo.start();
                                      d.posicionaDisparo(miNave);
                                      //Agregamos el disparo a la lista de disparos. 
                                      listaDisparos.add(d);

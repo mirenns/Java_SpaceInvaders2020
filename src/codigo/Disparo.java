@@ -7,21 +7,31 @@ package codigo;
 
 import java.awt.Image;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  *
  * @author mirenordonezdearce
  */
 public class Disparo {
+    //declaramos la imagen del disparo
     Image imagen = null;
+    
+    //Le damos una posición inicial
     public int posX = 0;
     public int posY = 0;
     
+    //Declramos el sonido del disparo
+    Clip sonidoDisparo;
     
     
     public Disparo() {
         try {
             imagen = ImageIO.read(getClass().getResource("/imagenes/disparo.png"));
+            
+            sonidoDisparo = AudioSystem.getClip();
+            sonidoDisparo.open(AudioSystem.getAudioInputStream(getClass().getResource("/sonidos/laser.wav")));
         }
         catch (Exception e){
         
