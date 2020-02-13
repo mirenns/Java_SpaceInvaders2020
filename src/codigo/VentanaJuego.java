@@ -83,8 +83,8 @@ public class VentanaJuego extends javax.swing.JFrame {
         imagenes[21] = plantilla.getSubimage(66, 320, 64, 32);
         
         //Cargamos las imágenes de las explosiones. 
-        imagenes[22] = plantilla.getSubimage(130, 320, 64, 32); //Explosión parteB
-        imagenes[23] = plantilla.getSubimage(194, 320, 64, 32); //Explosión parteA
+        imagenes[22] = plantilla.getSubimage(255, 320, 32, 32); //Explosión parteB
+        imagenes[23] = plantilla.getSubimage(255, 289, 32, 32); //Explosión parteA
         
         setSize(ANCHO_PANTALLA, ALTO_PANTALLA);
         //Creamos una imagen del mismo alto y ancho que el jPanel1 y lo guarda en el buffer.
